@@ -13,14 +13,37 @@ export default class Edituserpopup extends Component{
 		date : (this.props?.singleData?.date)   ? this.props.singleData.date  : "",
 		time : (this.props?.singleData?.time)   ? this.props.singleData.time  : "",
 		showUserSection : false,
-		showTodosSection : false
+		showTodosSection : false,
+		heading : ""
 	}	
 
 	componentWillMount = () => {
+
 		if(this.props.section === "addUser"){
-			this.setState({showUserSection : true})
+			if(this.state.email !== "" && this.state.email !== undefined){
+				this.setState({
+					showUserSection : true,
+					heading : "Edit User"
+				})
+			}else{
+				this.setState({
+					showUserSection : true,
+					heading : "Add User"
+				})
+			}
+			
 		}else if(this.props.section === "addTodo"){
-			this.setState({showTodosSection : true})
+			if(this.state.date !== "" && this.state.date !== undefined){
+				this.setState({
+					showTodosSection : true,
+					heading : "Edit Todo"
+				})
+			}else{
+				this.setState({
+					showTodosSection : true,
+					heading : "Add Todo"
+				})
+			}
 		}
 		this.setState({show : true});
 	}	
@@ -53,7 +76,7 @@ export default class Edituserpopup extends Component{
 	
 		    <Modal show={this.state.show} onHide={this.handleClose}>
 		        <Modal.Header closeButton>
-		          <Modal.Title>Modal heading</Modal.Title>
+		          <Modal.Title>{this.state.heading}</Modal.Title>
 		        </Modal.Header>
 
 		        <Modal.Body>
